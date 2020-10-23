@@ -1,6 +1,6 @@
 package com.example.cerericobalt.utils
 
-object AppConstants { 
+object AppConstants {
     const val CERERE_CONCEDIU = "cere_concediu"
     const val CERERE_INVOIRE = "cerere_invoire"
     const val REQUEST_TYPE = "request_type"
@@ -234,7 +234,7 @@ object AppConstants {
             "    Subsemnatul/a, <b>{EMPLOYEE_NAME}</b> \n" +
             "    angajat al Cobat Sign SRL, având funcția de \n" +
             "    <b>{EMPLOYEE_POSITION}</b> \n" +
-            "    prin prezenta prezenta solicit învoire în data de  <b>{LEAVE_DATE}</b> între \n" +
+            "    prin prezenta solicit învoire în data de  <b>{LEAVE_DATE}</b> între \n" +
             "    <b>{START_TIME}</b> -  <b>{END_TIME}</b>. Motivul solicitării: \n" +
             "    <b>{REQUEST_REASON}</b>.\n" +
             "    <br/>\n" +

@@ -145,7 +145,8 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
     }
 
     private fun getImage() {
-        val bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().absolutePath + "/" + "CereriCobalt/signature.jpeg")
+        val bm =
+            BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().absolutePath + "/" + "CereriCobalt/signature.jpeg")
         val baos = ByteArrayOutputStream()
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos) // bm is the bitmap object
         val b: ByteArray = baos.toByteArray()
@@ -193,17 +194,14 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
                 recuperationPeriod.text.toString().toUpperCase(Locale.getDefault())
             )
         }
-
-
-
         return html
     }
 
     override fun onFailed() {
-        Toast.makeText(this, "failed", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Eroare", Toast.LENGTH_LONG).show()
     }
 
     override fun onSuccess() {
-        Toast.makeText(this, "success", Toast.LENGTH_LONG).show()
+        Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
     }
 }
