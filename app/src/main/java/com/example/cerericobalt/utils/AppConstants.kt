@@ -10,7 +10,7 @@ object AppConstants {
     const val EMPLOYEE_NAME_KEY = "{EMPLOYEE_NAME}"
     const val EMPLOYEE_OCCUPIED_POSITION = "{EMPLOYEE_POSITION}"
     const val START_DATE_KEY = "{START_DATE}"
-    const val END_DATE_KEY = "{START_DATE}"
+    const val END_DATE_KEY = "{END_DATE}"
     const val NR_OF_DAYS_KEY = "{NR_OF_DAYS}"
     const val LEAVE_DATE_KEY = "{LEAVE_DATE}"
     const val START_TIME_KEY = "{START_TIME}"
@@ -18,6 +18,7 @@ object AppConstants {
     const val REQUEST_REASON_KEY = "{REQUEST_REASON}"
     const val RECUPERATION_PERIOD_KEY = "{RECUPERATION_PERIOD}"
     const val FILL_DATE_KEY = "{SIGNED_DATE}"
+    const val SIGNATURE_KEY = "{SIGNATURE_IMAGE}"
 
 
     const val CONCEDIU_HTML = "<html lang=\"ro\">\n" +

@@ -10,15 +10,17 @@
     <string name="nume">Nume: </string>
     <string name="prenume">Prenume: </string>
     <string name="functia">Funcția: </string>
-    <string name="start_date">De la data: </string>
+    <string name="start_date">Începând cu data: </string>
     <string name="end_date">Până la data: </string>
     <string name="completion_date">Data întocmirii: </string>
 
     <string name="date">Data: </string>
-    <string name="start_time">De la ora: </string>
+    <string name="start_time">Începând cu ora: </string>
     <string name="end_time">Până la ora: </string>
     <string name="requestReason">Motivul cererii: </string>
     <string name="recuperation">Recuperez aceste ore, după programul: </string>
+
+    <string name="add_signature">Adaugă semnătuă</string>
 
     <string name="send_application">Trimite cererea</string>
     <string name="fill_date">Data întocmirii</string>

@@ -32,7 +32,8 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         convertButton.setOnClickListener {
             convertToPDF()
         }
-
+        signatureButton.setOnClickListener {
+        }
         startDate.setOnClickListener {
             openDatePickerDialog(startDate)
         }
@@ -135,10 +136,12 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
 
     private fun extractAndSetData(): String {
         val employeeName =
-            "${employeeFirstName.text.toString()} ${employeeLastName.text.toString()}".capitalize()
+            "${employeeFirstName.text.toString()} ${employeeLastName.text.toString()}"
+                .toUpperCase(Locale.getDefault())
         html = html.replaceFirst(AppConstants.EMPLOYEE_NAME_KEY, employeeName, true)
 
-        val employeeOccupiedFunction = employeeFunction.text.toString().capitalize()
+        val employeeOccupiedFunction =
+            employeeFunction.text.toString().toUpperCase(Locale.getDefault())
         html = html.replaceFirst(
             AppConstants.EMPLOYEE_OCCUPIED_POSITION,
             employeeOccupiedFunction,
@@ -147,6 +150,7 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
 
         val fillDate = fillDate.text.toString().replace(". ", "/")
         html = html.replaceFirst(AppConstants.FILL_DATE_KEY, fillDate, true)
+        html = html.replaceFirst(AppConstants.SIGNATURE_KEY, "", true)
 
         if (requestType == AppConstants.PAID_LEAVE) {
             val startDate = startDate.text.toString()
@@ -160,10 +164,13 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
             html = html.replaceFirst(AppConstants.LEAVE_DATE_KEY, date)
             html = html.replaceFirst(AppConstants.START_TIME_KEY, startTime.text.toString())
             html = html.replaceFirst(AppConstants.END_TIME_KEY, endTime.text.toString())
-            html = html.replaceFirst(AppConstants.REQUEST_REASON_KEY, requestReason.text.toString())
+            html = html.replaceFirst(
+                AppConstants.REQUEST_REASON_KEY,
+                requestReason.text.toString().toUpperCase(Locale.getDefault())
+            )
             html = html.replaceFirst(
                 AppConstants.RECUPERATION_PERIOD_KEY,
-                recuperationPeriod.textAlignment.toString()
+                recuperationPeriod.text.toString().toUpperCase(Locale.getDefault())
             )
         }
 
