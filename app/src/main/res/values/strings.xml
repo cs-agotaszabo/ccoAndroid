@@ -21,4 +21,6 @@
     <string name="recuperation">Recuperez aceste ore, după programul: </string>
 
     <string name="send_application">Trimite cererea</string>
+    <string name="fill_date">Data întocmirii</string>
+
 </resources>

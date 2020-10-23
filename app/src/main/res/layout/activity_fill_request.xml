@@ -46,8 +46,9 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:inputType="textMultiLine"
+                        android:inputType="text"
                         android:textColor="@color/colorPrimary"
+                        android:imeOptions="actionNext"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -81,7 +82,7 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:inputType="textMultiLine"
+                        android:imeOptions="actionNext"
                         android:textColor="@color/colorPrimary"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -116,8 +117,8 @@
                         android:layout_height="match_parent"
                         android:background="@null"
                         android:gravity="center_vertical"
-                        android:inputType="textMultiLine"
                         android:textColor="@color/colorPrimary"
+                        android:imeOptions="actionNext"
                         android:textSize="14sp" />
                 </LinearLayout>
 
@@ -148,14 +149,11 @@
                         android:background="@drawable/editable_field_background"
                         android:focusableInTouchMode="true"
                         android:padding="6dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
+                        <TextView
                             android:id="@+id/startDate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null"
                             android:gravity="center_vertical"
-                            android:inputType="textMultiLine"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -166,14 +164,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/end_date"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="38dp"
@@ -181,8 +177,7 @@
                         android:background="@drawable/editable_field_background"
                         android:focusableInTouchMode="true"
                         android:padding="6dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
+                        <TextView
                             android:id="@+id/endDate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -201,21 +196,18 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:visibility="gone">
-
                 <LinearLayout
                     android:id="@+id/leaveDateField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/date"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="38dp"
@@ -223,33 +215,27 @@
                         android:background="@drawable/editable_field_background"
                         android:focusableInTouchMode="true"
                         android:padding="6dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
+                        <TextView
                             android:id="@+id/leaveDate"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@null"
                             android:gravity="center_vertical"
-                            android:inputType="textMultiLine"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/startTimeField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/start_time"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="38dp"
@@ -257,8 +243,7 @@
                         android:background="@drawable/editable_field_background"
                         android:focusableInTouchMode="true"
                         android:padding="6dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
+                        <TextView
                             android:id="@+id/startTime"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -269,21 +254,18 @@
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/endTimeField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/end_time"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="38dp"
@@ -291,8 +273,7 @@
                         android:background="@drawable/editable_field_background"
                         android:focusableInTouchMode="true"
                         android:padding="6dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
+                        <TextView
                             android:id="@+id/endTime"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -303,22 +284,18 @@
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
-
-
                 <LinearLayout
                     android:id="@+id/requestReasonField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/requestReason"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
@@ -326,33 +303,30 @@
                         android:background="@drawable/editable_field_background"
                         android:focusableInTouchMode="true"
                         android:padding="6dp">
-
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/requestReason"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@null"
-                            android:gravity="center_vertical"
+                            android:gravity="top"
                             android:inputType="textMultiLine"
+                            android:imeOptions="actionNext"
                             android:textColor="@color/colorPrimary"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:id="@+id/recuperationPeriodField"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="vertical">
-
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/recuperation"
                         android:textColor="@color/colorPrimary"
                         android:textSize="16sp" />
-
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="70dp"
@@ -360,19 +334,47 @@
                         android:background="@drawable/editable_field_background"
                         android:focusableInTouchMode="true"
                         android:padding="6dp">
-
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/recuperationPeriod"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:background="@null"
-                            android:gravity="center_vertical"
+                            android:gravity="top"
                             android:inputType="textMultiLine"
                             android:textColor="@color/colorPrimary"
+                            android:imeOptions="actionDone"
                             android:textSize="14sp" />
                     </LinearLayout>
                 </LinearLayout>
+            </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/fillDateField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fill_date"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/editable_field_background"
+                    android:focusableInTouchMode="true"
+                    android:padding="6dp">
+                    <TextView
+                        android:id="@+id/fillDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+                </LinearLayout>
             </LinearLayout>
 
             <Button
