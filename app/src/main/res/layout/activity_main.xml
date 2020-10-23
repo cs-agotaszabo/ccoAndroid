@@ -4,21 +4,43 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:background="@color/white"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!" />
+    <LinearLayout
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="120dp"
+        android:background="@drawable/button_bg">
+    </LinearLayout>
 
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
     <Button
-        android:id="@+id/fillVacationRequestForm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/paidLeave"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="40dp"
         android:layout_marginTop="30dp"
-        android:text="Request paid leave" />
+        android:background="@drawable/button_bg"
+        android:text="@string/paid_leave"
+        android:backgroundTint="@color/grey"
+        android:textColor="@color/colorPrimary" />
+
+    <Button
+        android:id="@+id/leaveRequest"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:layout_marginHorizontal="40dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="80dp"
+        android:background="@drawable/button_bg"
+        android:text="@string/leave_request"
+        android:textColor="@color/white" />
 
 </LinearLayout>

@@ -31,16 +31,19 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         askForPermissions()
 
-        fillVacationRequestForm.setOnClickListener {
-            this.goToFillRequestActivity()
+        paidLeave.setOnClickListener {
+            this.goToFillRequestActivity(AppConstants.PAID_LEAVE)
+        }
+        leaveRequest.setOnClickListener {
+            this.goToFillRequestActivity(AppConstants.LEAVE_REQUEST)
         }
     }
 
-    private fun goToFillRequestActivity() {
+    private fun goToFillRequestActivity(requestType: String) {
         if (isReadExternalGranted && isWriteExternalGranted) {
             startActivity(
                 Intent(this, FillRequestActivity::class.java)
-                    .putExtra(AppConstants.REQUEST_TYPE, AppConstants.PAID_LEAVE)
+                    .putExtra(AppConstants.REQUEST_TYPE, requestType)
             )
         } else {
             askForPermissions()
