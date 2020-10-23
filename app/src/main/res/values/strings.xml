@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Cereri Cobalt</string>
+
+    <string name="leave_request_application">Cerere învoire</string>
+    <string name="paid_leave_application">Cerere concediu de odihnă</string>
+
+    <string name="leave_request">Cerere învoire</string>
+    <string name="paid_leave">Cerere concediu</string>
+
+    <string name="nume">Nume: </string>
+    <string name="prenume">Prenume: </string>
+    <string name="functia">Funcția: </string>
+    <string name="start_date">De la: </string>
+    <string name="end_date">Până la: </string>
+    <string name="completion_date">Data întocmirii: </string>
+
+    <string name="send_application">Trimite cererea</string>
 </resources>
