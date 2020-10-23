@@ -21,8 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FillRequestActivity"
-            android:label="@string/title_activity_fill_request">
+            android:name=".FillRequestActivity">
         </activity>
     </application>
 
