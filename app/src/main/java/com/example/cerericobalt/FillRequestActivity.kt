@@ -2,9 +2,11 @@ package com.example.cerericobalt
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +24,7 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fill_request)
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         requestType =
             intent?.extras?.getString(AppConstants.REQUEST_TYPE) ?: AppConstants.PAID_LEAVE
         setExtraData()
@@ -33,6 +36,9 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
             convertToPDF()
         }
         signatureButton.setOnClickListener {
+            startActivity(
+                Intent(this, SignatureActivity::class.java)
+            )
         }
         startDate.setOnClickListener {
             openDatePickerDialog(startDate)

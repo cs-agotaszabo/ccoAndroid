@@ -20,9 +20,12 @@
     <string name="requestReason">Motivul cererii: </string>
     <string name="recuperation">Recuperez aceste ore, după programul: </string>
 
-    <string name="add_signature">Adaugă semnătuă</string>
+    <string name="add_signature">Adaugă semnătură</string>
+    <string name="save_signature">Salvează semnătura</string>
+    <string name="draw_signature">Desenează semnătura în chenar</string>
 
     <string name="send_application">Trimite cererea</string>
     <string name="fill_date">Data întocmirii</string>
+    <string name="clear">Resetează</string>
 
 </resources>
