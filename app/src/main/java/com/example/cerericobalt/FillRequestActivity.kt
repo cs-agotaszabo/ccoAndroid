@@ -6,10 +6,10 @@ import android.os.Bundle
 import android.os.Environment
 import android.view.View
 import android.widget.TextView
-import android.widget.TimePicker
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.cerericobalt.utils.AppConstants
+import com.example.cerericobalt.utils.DateHelper
 import io.github.lucasfsc.html2pdf.Html2Pdf
 import kotlinx.android.synthetic.main.activity_fill_request.*
 import java.io.File
@@ -34,16 +34,16 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         }
 
         startDate.setOnClickListener {
-            openDaTePickerDialog(startDate)
+            openDatePickerDialog(startDate)
         }
         endDate.setOnClickListener {
-            openDaTePickerDialog(endDate)
+            openDatePickerDialog(endDate)
         }
         leaveDate.setOnClickListener {
-            openDaTePickerDialog(leaveDate)
+            openDatePickerDialog(leaveDate)
         }
         fillDateField.setOnClickListener {
-            openDaTePickerDialog(fillDate)
+            openDatePickerDialog(fillDate)
         }
         startTime.setOnClickListener {
             openTimePickerDialog(startTime)
@@ -54,7 +54,7 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         setFillDate()
     }
 
-    private fun openDaTePickerDialog(textView: TextView) {
+    private fun openDatePickerDialog(textView: TextView) {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)
         val month = c.get(Calendar.MONTH)
@@ -62,9 +62,10 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         val dpd = DatePickerDialog(
             this,
             DatePickerDialog.OnDateSetListener { _, year, monthOfYear, dayOfMonth ->
-                // Display Selected date in textbox
-                val monthV = if (monthOfYear+1 < 10) "0${monthOfYear+1}" else (monthOfYear+1).toString()
-                textView.text = ("$dayOfMonth. $monthV. $year.")
+                val monthV =
+                    if (monthOfYear + 1 < 10) "0${monthOfYear + 1}" else (monthOfYear + 1).toString()
+                val dayV = if (dayOfMonth < 10) "0$dayOfMonth" else dayOfMonth.toString()
+                textView.text = ("$dayV. $monthV. $year")
             }, year, month, day
         )
         dpd.show()
@@ -100,40 +101,71 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         val month = c.get(Calendar.MONTH) + 1
         val day = c.get(Calendar.DAY_OF_MONTH)
         val monthV = if (month < 10) "0${month}" else month.toString()
-        fillDate.text = "$day. $monthV. $year."
+        fillDate.text = String.format("$day. $monthV. $year")
     }
 
     private fun convertToPDF() {
-        val file = getFile()
-        val htmlString = extractAndSetData()
         val converter = Html2Pdf.Companion.Builder()
             .context(this)
-            .file(file)
-            .html(htmlString)
+            .file(getFile())
+            .html(extractAndSetData())
             .build()
         converter.convertToPdf(this)
     }
 
     private fun getFile(): File {
         val path = Environment.getExternalStorageDirectory().absolutePath + "/" + "CereriCobalt"
-        val fileName = "Test.pdf"
+        val fileName = getFileName()
         val dir = File(path);
         if (!dir.exists())
             dir.mkdirs()
         return File(dir, fileName)
     }
 
+    private fun getFileName(): String {
+        val employeeName =
+            "${employeeFirstName.text.toString()}_${employeeLastName.text.toString()}".capitalize()
+
+        return if (requestType == AppConstants.PAID_LEAVE) {
+            "${AppConstants.CERERE_CONCEDIU}_$employeeName.pdf"
+        } else {
+            "${AppConstants.CERERE_INVOIRE}_$employeeName.pdf"
+        }
+    }
+
     private fun extractAndSetData(): String {
         val employeeName =
             "${employeeFirstName.text.toString()} ${employeeLastName.text.toString()}".capitalize()
-        html = html.replace(AppConstants.EMPLOYEE_NAME_KEY, employeeName, true)
+        html = html.replaceFirst(AppConstants.EMPLOYEE_NAME_KEY, employeeName, true)
 
         val employeeOccupiedFunction = employeeFunction.text.toString().capitalize()
-        html = html.replace(
+        html = html.replaceFirst(
             AppConstants.EMPLOYEE_OCCUPIED_POSITION,
             employeeOccupiedFunction,
             true
         )
+
+        val fillDate = fillDate.text.toString().replace(". ", "/")
+        html = html.replaceFirst(AppConstants.FILL_DATE_KEY, fillDate, true)
+
+        if (requestType == AppConstants.PAID_LEAVE) {
+            val startDate = startDate.text.toString()
+            html = html.replaceFirst(AppConstants.START_DATE_KEY, startDate, true)
+            val endDate = endDate.text.toString()
+            html = html.replaceFirst(AppConstants.END_DATE_KEY, endDate, true)
+            val nrOfDays = DateHelper.getBusinessDays(startDate, endDate)
+            html = html.replaceFirst(AppConstants.NR_OF_DAYS_KEY, nrOfDays)
+        } else {
+            val date = leaveDate.text.toString().replace(". ", "/")
+            html = html.replaceFirst(AppConstants.LEAVE_DATE_KEY, date)
+            html = html.replaceFirst(AppConstants.START_TIME_KEY, startTime.text.toString())
+            html = html.replaceFirst(AppConstants.END_TIME_KEY, endTime.text.toString())
+            html = html.replaceFirst(AppConstants.REQUEST_REASON_KEY, requestReason.text.toString())
+            html = html.replaceFirst(
+                AppConstants.RECUPERATION_PERIOD_KEY,
+                recuperationPeriod.textAlignment.toString()
+            )
+        }
 
         return html
     }

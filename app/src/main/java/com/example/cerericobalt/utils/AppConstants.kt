@@ -1,6 +1,8 @@
 package com.example.cerericobalt.utils
 
 object AppConstants {
+    const val CERERE_CONCEDIU = "cere_concediu"
+    const val CERERE_INVOIRE = "cerere_invoire"
     const val REQUEST_TYPE = "request_type"
     const val PAID_LEAVE = "paid_leave"
     const val LEAVE_REQUEST = "leave_request"
@@ -15,6 +17,7 @@ object AppConstants {
     const val END_TIME_KEY = "{END_TIME}"
     const val REQUEST_REASON_KEY = "{REQUEST_REASON}"
     const val RECUPERATION_PERIOD_KEY = "{RECUPERATION_PERIOD}"
+    const val FILL_DATE_KEY = "{SIGNED_DATE}"
 
 
     const val CONCEDIU_HTML = "<html lang=\"ro\">\n" +
