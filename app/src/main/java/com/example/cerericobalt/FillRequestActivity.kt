@@ -3,6 +3,8 @@ package com.example.cerericobalt
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
@@ -14,8 +16,10 @@ import com.example.cerericobalt.utils.AppConstants
 import com.example.cerericobalt.utils.DateHelper
 import io.github.lucasfsc.html2pdf.Html2Pdf
 import kotlinx.android.synthetic.main.activity_fill_request.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.util.*
+
 
 class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
     private var requestType: String = AppConstants.PAID_LEAVE
@@ -140,7 +144,18 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         }
     }
 
+    private fun getImage() {
+        val bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().absolutePath + "/" + "CereriCobalt/signature.jpeg")
+        val baos = ByteArrayOutputStream()
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos) // bm is the bitmap object
+        val b: ByteArray = baos.toByteArray()
+        val encodedImage: String = Base64.getEncoder().encodeToString(b)
+        html = html.replaceFirst(AppConstants.SIGNATURE_KEY, "data:image/jpg;base64,$encodedImage")
+
+    }
+
     private fun extractAndSetData(): String {
+        getImage()
         val employeeName =
             "${employeeFirstName.text.toString()} ${employeeLastName.text.toString()}"
                 .toUpperCase(Locale.getDefault())
@@ -156,7 +171,6 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
 
         val fillDate = fillDate.text.toString().replace(". ", "/")
         html = html.replaceFirst(AppConstants.FILL_DATE_KEY, fillDate, true)
-        html = html.replaceFirst(AppConstants.SIGNATURE_KEY, "", true)
 
         if (requestType == AppConstants.PAID_LEAVE) {
             val startDate = startDate.text.toString()
@@ -179,6 +193,8 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
                 recuperationPeriod.text.toString().toUpperCase(Locale.getDefault())
             )
         }
+
+
 
         return html
     }

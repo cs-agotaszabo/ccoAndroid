@@ -1,6 +1,6 @@
 package com.example.cerericobalt.utils
 
-object AppConstants {
+object AppConstants { 
     const val CERERE_CONCEDIU = "cere_concediu"
     const val CERERE_INVOIRE = "cerere_invoire"
     const val REQUEST_TYPE = "request_type"
@@ -133,8 +133,8 @@ object AppConstants {
             "    </div>\n" +
             "\n" +
             "    <div class=\"div-date\">\n" +
-            "      <div>Semnatura</div>\n" +
-            "      <div>{SIGNATURE_IMAGE}</div>\n" +
+            "      <div>Semnătura</div>\n" +
+            "      <div><img width=\"130\" height=\"65\" src=\"{SIGNATURE_IMAGE}\"></img></div>\n" +
             "    </div>\n" +
             "\n" +
             "  </div>\n" +
@@ -258,8 +258,8 @@ object AppConstants {
             "    </div>\n" +
             "\n" +
             "    <div class=\"div-date\">\n" +
-            "      <div>Semnatura</div>\n" +
-            "      <div>{SIGNATURE_IMAGE}</div>\n" +
+            "      <div>Semnătura</div>\n" +
+            "      <div><img width=\"130\" height=\"65\" src=\"{SIGNATURE_IMAGE}\"></img></div>\n" +
             "    </div>\n" +
             "\n" +
             "  </div>\n" +
