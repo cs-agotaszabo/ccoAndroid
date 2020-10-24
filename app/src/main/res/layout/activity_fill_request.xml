@@ -18,6 +18,15 @@
             android:gravity="center_horizontal"
             android:orientation="vertical"
             android:paddingHorizontal="40dp">
+            <TextView
+                android:id="@+id/pageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:text="@string/draw_signature"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="25dp"
+                android:textSize="24dp"/>
 
             <LinearLayout
                 android:id="@+id/nameField"
@@ -383,7 +392,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="38dp"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="40dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/button_bg"
                 android:backgroundTint="@color/grey"
                 android:text="@string/add_signature"

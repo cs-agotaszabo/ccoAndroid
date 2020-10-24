@@ -1,5 +1,6 @@
 package com.example.cerericobalt
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
@@ -18,6 +19,7 @@ import io.github.lucasfsc.html2pdf.Html2Pdf
 import kotlinx.android.synthetic.main.activity_fill_request.*
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.lang.Exception
 import java.util.*
 
 
@@ -98,9 +100,11 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
     private fun setExtraData() {
         if (requestType == AppConstants.PAID_LEAVE) {
             paidLeave.visibility = View.VISIBLE
+            pageTitle.text = getString(R.string.paid_leave)
             html = AppConstants.CONCEDIU_HTML
         } else {
             leaveRequest.visibility = View.VISIBLE
+            pageTitle.text = getString(R.string.leave_request)
             html = AppConstants.INVOIRE_HTML
         }
         setFillDate()
@@ -116,12 +120,21 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
     }
 
     private fun convertToPDF() {
-        val converter = Html2Pdf.Companion.Builder()
-            .context(this)
-            .file(getFile())
-            .html(extractAndSetData())
-            .build()
-        converter.convertToPdf(this)
+        if (!isFormIncomplete()) {
+            if (isSignatureSaved()) {
+                val converter = Html2Pdf.Companion.Builder()
+                    .context(this)
+                    .file(getFile())
+                    .html(extractAndSetData())
+                    .build()
+                converter.convertToPdf(this)
+            }
+        } else {
+            AlertDialog.Builder(this)
+                .setMessage("Toate câmpurile sunt obligatorii!")
+                .show()
+
+        }
     }
 
     private fun getFile(): File {
@@ -183,8 +196,14 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         } else {
             val date = leaveDate.text.toString().replace(". ", "/")
             html = html.replaceFirst(AppConstants.LEAVE_DATE_KEY, date)
-            html = html.replaceFirst(AppConstants.START_TIME_KEY, startTime.text.toString())
-            html = html.replaceFirst(AppConstants.END_TIME_KEY, endTime.text.toString())
+            html = html.replaceFirst(
+                AppConstants.START_TIME_KEY,
+                startTime.text.toString().replace(" ", "")
+            )
+            html = html.replaceFirst(
+                AppConstants.END_TIME_KEY,
+                endTime.text.toString().replace(" ", "")
+            )
             html = html.replaceFirst(
                 AppConstants.REQUEST_REASON_KEY,
                 requestReason.text.toString().toUpperCase(Locale.getDefault())
@@ -195,6 +214,29 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
             )
         }
         return html
+    }
+
+    private fun isFormIncomplete(): Boolean {
+        val requiredCommonFields =
+            employeeFirstName.text.isNullOrBlank() || employeeLastName.text.isNullOrBlank() || employeeFunction.text.isNullOrBlank() ?: false
+        val requiredFields = if (requestType == AppConstants.PAID_LEAVE) {
+            startDate.text.isNullOrBlank() || endDate.text.isNullOrBlank()
+        } else {
+            leaveDate.text.isNullOrBlank() || startTime.text.isNullOrBlank() || endTime.text.isNullOrBlank() || requestReason.text.isNullOrBlank() || recuperationPeriod.text.isNullOrBlank()
+        }
+        return requiredCommonFields || requiredFields
+    }
+
+    private fun isSignatureSaved(): Boolean {
+            val bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().absolutePath + "/" + "CereriCobalt/signature.jpeg")
+        return if (bm !== null) {
+            true
+        } else {
+            AlertDialog.Builder(this)
+                .setMessage("Te rog adaugă o semnătură")
+                .show()
+            false
+        }
     }
 
     override fun onFailed() {
