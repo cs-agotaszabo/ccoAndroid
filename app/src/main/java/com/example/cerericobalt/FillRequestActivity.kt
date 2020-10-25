@@ -46,9 +46,6 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
                 Intent(this, SignatureActivity::class.java)
             )
         }
-        signatureButton.setOnClickListener {
-
-        }
         startDate.setOnClickListener {
             openDatePickerDialog(startDate)
         }
