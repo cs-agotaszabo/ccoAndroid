@@ -6,6 +6,7 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.view.View
@@ -19,7 +20,6 @@ import io.github.lucasfsc.html2pdf.Html2Pdf
 import kotlinx.android.synthetic.main.activity_fill_request.*
 import java.io.ByteArrayOutputStream
 import java.io.File
-import java.lang.Exception
 import java.util.*
 
 
@@ -45,6 +45,9 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
             startActivity(
                 Intent(this, SignatureActivity::class.java)
             )
+        }
+        signatureButton.setOnClickListener {
+
         }
         startDate.setOnClickListener {
             openDatePickerDialog(startDate)
@@ -228,7 +231,8 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
     }
 
     private fun isSignatureSaved(): Boolean {
-            val bm = BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().absolutePath + "/" + "CereriCobalt/signature.jpeg")
+        val bm =
+            BitmapFactory.decodeFile(Environment.getExternalStorageDirectory().absolutePath + "/" + "CereriCobalt/signature.jpeg")
         return if (bm !== null) {
             true
         } else {
@@ -239,11 +243,28 @@ class FillRequestActivity : AppCompatActivity(), Html2Pdf.OnCompleteConversion {
         }
     }
 
+    private fun sendMail() {
+        val emailIntent = Intent(Intent.ACTION_SEND)
+        emailIntent.type = "text/plain"
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, pageTitle.text.toString())
+        val root = Environment.getExternalStorageDirectory()
+        val pathToMyAttachedFile = "/" + "CereriCobalt/" + getFileName()
+        val file = File(root, pathToMyAttachedFile)
+        if (!file.exists() || !file.canRead()) {
+            return
+        }
+        val uri: Uri = Uri.fromFile(file)
+        emailIntent.putExtra(Intent.EXTRA_STREAM, uri)
+        startActivity(Intent.createChooser(emailIntent, "Send Email..."))
+    }
+
     override fun onFailed() {
         Toast.makeText(this, "Eroare", Toast.LENGTH_LONG).show()
+
     }
 
     override fun onSuccess() {
         Toast.makeText(this, "Success", Toast.LENGTH_LONG).show()
+        sendMail()
     }
 }

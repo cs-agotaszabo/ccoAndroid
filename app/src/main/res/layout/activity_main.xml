@@ -46,6 +46,7 @@
         android:layout_marginBottom="80dp"
         android:background="@drawable/button_bg"
         android:text="@string/leave_request"
-        android:textColor="@color/white" />
+        android:backgroundTint="@color/grey"
+        android:textColor="@color/colorPrimary" />
 
 </LinearLayout>
